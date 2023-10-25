@@ -3,7 +3,7 @@ import mongooseUniqueValidator from "mongoose-unique-validator";
 
 const shoeSchema = mongoose.Schema(
   {
-    nom: String,
+    nom:  String,
     prix: Number,
     description: String,
     image: String,

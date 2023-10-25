@@ -42,7 +42,7 @@ export const allShoes = async (req, res, next) => {
 
 export const oneShoe = async (req, res, next) => {
   try {
-    const { id } = req.params.id;
+    const { id } = req.params;
     const shoe = await Model.findById(id);
     res.status(200).json(shoe);
   } catch (error) {
@@ -51,7 +51,7 @@ export const oneShoe = async (req, res, next) => {
 };
 export const delShoe = async (req, res, next) => {
   try {
-    const shoe = await Model.findById(req.params);
+    const shoe = await Model.findById(req.params.id);
     if (!shoe) res.status(404).json("Shoe not found.");
 
     await Model.findByIdAndDelete(req.params.id);
@@ -76,6 +76,7 @@ export const putShoe = async (req, res, next) => {
 export const likeShoe = async (req, res) => {
   try {
     const { id } = req.params;
+    console.log(id)
 
     // Recherchez la chaussure par son identifiant unique (id)
     const shoe = await Shoe.findById(id);
@@ -83,10 +84,10 @@ export const likeShoe = async (req, res) => {
     if (!shoe) {
       return res.status(404).json({ error: 'Chaussure non trouvée' });
     }
-
+    console.log(shoe)
     // Incrémentez le nombre de "likes" pour cette chaussure
-    shoe.like =+ 1;
-
+    shoe.like++ ;
+console.log(shoe)
     // Sauvegardez la chaussure mise à jour dans la base de données
     await shoe.save();
 
